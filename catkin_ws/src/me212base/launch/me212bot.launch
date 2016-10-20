@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<launch>
+    <arg name="real_arm" default="true" />
+    
+    <param name="robot_description" command="$(find xacro)/xacro.py $(find me212bot)/model/me212bot.xacro"/>
+    
+    <node if="$(arg real_arm)" name="dynamixel_manager" pkg="dynamixel_controllers" type="controller_manager.py" required="true" output="screen">
+        <rosparam>
+            namespace: dxl_manager
+            serial_ports:
+                pan_tilt_port:
+                    port_name: "/dev/ttyUSB0"
+                    baud_rate: 400000
+                    min_motor_id: 1
+                    max_motor_id: 25
+                    update_rate: 100
+        </rosparam>
+    </node>
+    
+    <node unless="$(arg real_arm)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
+        <param name="rate" value="100"/>
+        <param name="use_gui" value="true"/>
+        <rosparam>
+            source_list: 
+                - virtual_joint_states
+        </rosparam>
+    </node>
+</launch>

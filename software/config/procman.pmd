@@ -1,0 +1,81 @@
+
+cmd "0-roscore" {
+    exec = "roscore";
+    host = "localhost";
+}
+
+cmd "1-robot" {
+    exec = "roslaunch me212bot me212bot.launch";
+    host = "localhost";
+}
+
+cmd "1-robot-arm-virtual" {
+    exec = "roslaunch me212arm me212arm.launch real_arm:=false";
+    host = "localhost";
+}
+cmd "1-robot-arm-real" {
+    exec = "roslaunch me212arm me212arm.launch real_arm:=true";
+    host = "localhost";
+}
+cmd "1-robot-arm-real-controller" {
+    exec = "roslaunch me212arm start_arm_controller.launch";
+    host = "localhost";
+}
+cmd "1-robot-arm-real-joint-state-publisher" {
+    exec = "rosrun me212arm joint_state_publisher.py";
+    host = "localhost";
+}
+
+cmd "2-rviz" {
+    exec = "roslaunch me212bot viz.launch";
+    host = "localhost";
+}
+
+cmd "3-tf" {
+    exec = "rosrun tf static_transform_publisher 0 0 0 0 0 0 /map /robot_base 100";
+    host = "localhost";
+}
+
+cmd "4.1-planning-interactive" {
+    exec = "rosrun me212arm interactive_ik.py";
+    host = "localhost";
+}
+
+cmd "4.2-planning-scripted" {
+    exec = "rosrun me212arm run_planning.py";
+    host = "localhost";
+}
+
+cmd "4.3-planning-collision-test" {
+    exec = "rosrun me212arm collision.py";
+    host = "localhost";
+}
+
+cmd "4.4-planning-rrt" {
+    exec = "rosrun me212arm rrt.py";
+    host = "localhost";
+}
+
+
+
+script "run-virtual" {
+    start cmd "0-roscore";
+    wait ms 1000;
+    start cmd "1-robot";
+    start cmd "1-robot-arm-virtual";
+    start cmd "2-rviz";
+    start cmd "3-tf";
+}
+
+script "run-real" {
+    start cmd "0-roscore";
+    wait ms 1000;
+    start cmd "1-robot";
+    start cmd "1-robot-arm-real";
+    wait ms 5000;
+    start cmd "1-robot-arm-real-controller";
+    start cmd "1-robot-arm-real-joint-state-publisher";
+    start cmd "2-rviz";
+    start cmd "3-tf";
+}
+

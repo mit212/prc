@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="me212bot">
+    
+<xacro:property name="link1_length" value="0.1778" />
+<xacro:property name="link2_length" value="0.235" />
+<xacro:property name="M_PI" value="3.1415926" />
+
+<link name="arm_base">
+    <visual>
+        <geometry>
+            <box size="0.01 0.01 0.05" />
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <material name="color1">
+            <color rgba="0.5 0.5 0.0 1"/>
+        </material>
+    </visual>
+</link>
+
+<link name="link1">
+    <visual>
+        <geometry>
+            <box size="0.01 0.01 ${link1_length}" />
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 ${link1_length/2}"/>
+        <material name="color2">
+            <color rgba="0.5 0.0 0.5 1"/>
+        </material>
+    </visual>
+</link>
+
+<link name="link2">
+    <visual>
+        <geometry>
+            <box size="0.01 0.01 ${link2_length}" />
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 ${link2_length/2}"/>
+        <material name="color3">
+            <color rgba="0.0 0.5 0.5 1"/>
+        </material>
+    </visual>
+</link>
+
+<link name="tcp">
+    <visual>
+        <geometry>
+            <sphere radius="0.01" />
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <material name="color4">
+            <color rgba="0.5 0.5 0.5 1"/>
+        </material>
+    </visual>
+</link>
+
+<joint name="joint1" type="revolute">
+    <parent link="arm_base"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0" />
+    <limit effort="300" lower="${-M_PI}" upper="${M_PI}" velocity="7.33"/>
+    <axis xyz="0 -1 0"/>
+</joint>
+
+<joint name="joint2" type="revolute">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin xyz="0 0 ${link1_length}" />
+    <limit effort="300" lower="${-M_PI}" upper="${M_PI}" velocity="7.33"/>
+    <axis xyz="0 -1 0"/>
+</joint>
+
+<joint name="joint3" type="fixed">
+    <parent link="link2"/>
+    <child link="tcp"/>
+    <origin xyz="0 0 ${link2_length}" />
+</joint>
+
+
+</robot>

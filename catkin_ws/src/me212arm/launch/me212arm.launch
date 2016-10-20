@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+
+<launch>
+    <arg name="real_arm" default="true" />
+    
+    <node if="$(arg real_arm)" name="dynamixel_manager" pkg="dynamixel_controllers" type="controller_manager.py" required="true" output="screen">
+        <rosparam>
+            namespace: dxl_manager
+            serial_ports:
+                arm_port:
+                    port_name: "/dev/ttyUSB0"
+                    baud_rate: 400000
+                    min_motor_id: 1
+                    max_motor_id: 25
+                    update_rate: 50
+        </rosparam>
+    </node>
+    
+    <node unless="$(arg real_arm)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
+        <param name="rate" value="100"/>
+        <param name="use_gui" value="true"/>
+        <rosparam>
+            source_list: 
+                - virtual_joint_states
+        </rosparam>
+    </node>
+    
+    <rosparam if="$(arg real_arm)" param="real_arm">true</rosparam>
+    <rosparam unless="$(arg real_arm)" param="real_arm">false</rosparam>
+</launch>

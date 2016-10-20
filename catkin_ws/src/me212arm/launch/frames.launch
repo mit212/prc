@@ -1,0 +1,3 @@
+<launch>
+   <node name="tf_base_map" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 1 map robot_base 10" />
+</launch>
