@@ -11,7 +11,7 @@ import tf.transformations as tfm
 from visualization_msgs.msg import Marker
 import geometry_msgs.msg
 from geometry_msgs.msg import Point, Pose
-from pr_apriltags.msg import AprilTagDetections
+from apriltags.msg import AprilTagDetections
 import helper
 
 nTfRetry = 1
