@@ -13,8 +13,8 @@ import traceback
 import sys
 import tf.transformations as tfm
 
-from me212bot.msg import WheelVelCmd
-from pr_apriltags.msg import AprilTagDetections
+from me212base.msg import WheelVelCmd
+from apriltags.msg import AprilTagDetections
 import helper
 
 class ApriltagNavigator():
