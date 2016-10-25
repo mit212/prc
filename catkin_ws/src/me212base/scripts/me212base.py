@@ -14,7 +14,7 @@ import sys
 import helper
 
 from visualization_msgs.msg import Marker
-from me212bot.msg import WheelVelCmd
+from me212base.msg import WheelVelCmd
 from geometry_msgs.msg import Point, Pose, Twist
 
 port = '/dev/ttyACM0'
