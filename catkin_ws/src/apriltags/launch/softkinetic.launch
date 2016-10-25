@@ -1,3 +1,0 @@
-<launch>
-    <include file="$(find k2_client)/launch/k2_client.launch"/>
-</launch>
