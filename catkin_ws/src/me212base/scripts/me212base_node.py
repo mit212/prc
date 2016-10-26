@@ -64,7 +64,7 @@ class Arduino():
 
 
 def main():
-    rospy.init_node('me212bot', anonymous=True)
+    rospy.init_node('me212base_node', anonymous=True)
     arduino = Arduino()
     rospy.spin()
     
