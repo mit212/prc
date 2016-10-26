@@ -36,6 +36,16 @@ cmd "3-tf" {
     host = "localhost";
 }
 
+cmd "3.1-apriltag_tf" {
+    exec = "roslaunch apriltags tag_tf.launch";
+    host = "localhost";
+}
+
+cmd "3.2-apriltags" {
+    exec = "roslaunch apriltags apriltags.launch";
+    host = "localhost";
+}
+
 cmd "4.1-planning-interactive" {
     exec = "rosrun me212arm interactive_ik.py";
     host = "localhost";
