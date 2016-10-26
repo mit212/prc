@@ -32,7 +32,7 @@ cmd "2-rviz" {
 }
 
 cmd "3-tf" {
-    exec = "rosrun tf static_transform_publisher 0 0 0 0 0 0 /map /robot_base 100";
+    exec = "rosrun tf static_transform_publisher 0.6 0.3 0 3.141592 0 1.570796 /map /robot_base 100";
     host = "localhost";
 }
 
@@ -43,6 +43,16 @@ cmd "3.1-apriltag_tf" {
 
 cmd "3.2-apriltags" {
     exec = "roslaunch apriltags apriltags.launch";
+    host = "localhost";
+}
+
+cmd "3.4-kinect" {
+    exec = "roslaunch freenect_launch freenect.launch depth_registration:=true";
+    host = "localhost";
+}
+
+cmd "3.5-kinect-calibrate" {
+    exec = "rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.025 image:=/camera/rgb/image_color";
     host = "localhost";
 }
 
