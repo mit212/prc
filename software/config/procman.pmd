@@ -32,7 +32,7 @@ cmd "2-rviz" {
 }
 
 cmd "3-tf" {
-    exec = "rosrun tf static_transform_publisher 0.6 0.3 0 3.141592 0 1.570796 /map /robot_base 100";
+    exec = "rosrun tf static_transform_publisher 0.6 0.3 0 1.570796 0 0 /map /robot_base 100";
     host = "localhost";
 }
 
