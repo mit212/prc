@@ -39,7 +39,6 @@ set_ros()
   else
     source /opt/ros/kinetic/setup.bash
   fi
-  export ROS_PACKAGE_PATH=$HOME/pokebot/ros_ws/:$ROS_PACKAGE_PATH
 }
 
 # some useful commands
