@@ -63,23 +63,12 @@ alias gohome2='rosservice call robot1_SetJoints "{j1: 0, j2: -40, j3: 33.5843266
 alias gozero='rosservice call robot1_SetJoints "{j1: 0, j2: 0, j3: 0, j4: 0, j5: 0, j6: 0}"'
 
 alias teleop='rosrun teleop teleop'
-alias pythonpokebot='ipython -i -c "run $CODE_BASE/catkin_ws/src/pokebot_config/python/pythonpokebot.py"'
 
 alias pman='bot-procman-sheriff -l $CODE_BASE/software/config/procman.pmd'
 
 alias roslocal='export ROS_MASTER_URI=http://localhost:11311'
 
-alias getjoint='rosservice call robot1_GetJoints'
-alias getcart='rosservice call robot1_GetCartesian'
-alias setjoint='rosservice call -- robot1_SetJoints'
-alias setcart='rosservice call -- robot1_SetCartesian'
-
 alias catmake='cd $CODE_BASE/catkin_ws; catkin_make; cd -;'
-
-alias lcmlocal='sudo ifconfig lo multicast; sudo route add -net 224.0.0.0 netmask 240.0.0.0 dev lo'
-
-alias runpokebotvirtual='time rosrun pokebot_planning heuristic.py --jfilename multi_obj_3.json | tee /tmp/$(date +%Y%m%d_%H%M%S)'
-alias runpokebot='time rosrun pokebot_planning heuristic.py --jfilename pokebot.json -s -v | tee /tmp/$(date +%Y%m%d_%H%M%S)'
 
 alias pythonprof='python -m cProfile -o /tmp/tmp.cprof'
 alias pythonprofthis='python -m cProfile -o '
