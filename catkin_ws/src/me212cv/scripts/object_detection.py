@@ -40,14 +40,8 @@ def main():
     useDepth = False
     if not useHSV:
         # Task 1
-        
-        # 1. initialize an OpenCV window
-        cv2.namedWindow("OpenCV_View")
-        
-        # 2. set callback func for mouse hover event
-        cv2.setMouseCallback("OpenCV_View", cvWindowMouseCallBackFunc)
-        
-        # 3. subscribe to image
+
+        # subscribe to image
         rospy.Subscriber('/camera/rgb/image_rect_color', Image, rosImageVizCallback)
     else:
         if not useDepth:
@@ -75,6 +69,9 @@ def rosImageVizCallback(msg):
 
     # 2. visualize it in a cv window
     cv2.imshow("OpenCV_View", cv_image)
+
+    # set callback func for mouse hover event
+    cv2.setMouseCallback("OpenCV_View", cvWindowMouseCallBackFunc)
     cv2.waitKey(3)
 
 # Task 1 callback for mouse event
