@@ -58,6 +58,8 @@ def lookupTransformList(homeFrame, targetFrame, listener):
         try:
             t = rospy.Time(0)
             (trans,rot) = listener.lookupTransform(homeFrame, targetFrame, t)
+            if listener.getLatestCommonTime(homeFrame, targetFrame) < (rospy.Time.now() - rospy.Duration(1)):
+                return None
             return list(trans) + list(rot)
         except: #(tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
             print '[lookupTransform] failed to transform'
