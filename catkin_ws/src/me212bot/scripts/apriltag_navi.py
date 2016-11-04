@@ -69,7 +69,7 @@ def navi_loop():
     
     while not rospy.is_shutdown() :
         # 1. get robot pose
-        robot_pose3d = lookupTransform(lr, '/map', '/base_link')
+        robot_pose3d = lookupTransformList('/map', '/robot_base', lr)
         
         if robot_pose3d is None:
             print '1. Tag not in view, Stop'
