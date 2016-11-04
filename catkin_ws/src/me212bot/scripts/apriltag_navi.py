@@ -45,7 +45,7 @@ def main():
     rospy.spin()
 
 def constant_vel_loop():
-    velcmd_pub = rospy.Publisher("/cmdvel", WheelCmdVel, queue_size = 1)
+    velcmd_pub = rospy.Publisher("/cmdvel", WheelVelCmd, queue_size = 1)
     rate = rospy.Rate(100) # 100hz
     
     while not rospy.is_shutdown() :
@@ -58,11 +58,11 @@ def constant_vel_loop():
         rate.sleep() 
 
 def navi_loop():
-    velcmd_pub = rospy.Publisher("/cmdvel", WheelCmdVel, queue_size = 1)
-    target_pose2d = [0.25, 0, np.pi]
+    velcmd_pub = rospy.Publisher("/cmdvel", WheelVelCmd, queue_size = 1)
+    target_pose2d = [0.25, 0.80, np.pi]
     rate = rospy.Rate(100) # 100hz
     
-    wcv = WheelCmdVel()
+    wcv = WheelVelCmd()
     
     arrived = False
     arrived_position = False
