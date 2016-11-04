@@ -11,7 +11,6 @@ import serial
 import pdb
 import traceback
 import sys
-import helper
 
 from visualization_msgs.msg import Marker
 from me212base.msg import WheelVelCmd
