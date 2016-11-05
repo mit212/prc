@@ -96,11 +96,11 @@ def navi_loop():
         robot_heading_vec = np.array([np.cos(robot_yaw), np.sin(robot_yaw)])
         heading_err_cross = cross2d( robot_heading_vec, pos_delta / np.linalg.norm(pos_delta) )
         
-        # print 'robot_position2d', robot_position2d, 'target_position2d', target_position2d
-        # print 'pos_delta', pos_delta
-        # print 'robot_yaw', robot_yaw
-        # print 'norm delta', np.linalg.norm( pos_delta ), 'diffrad', diffrad(robot_yaw, target_pose2d[2])
-        # print 'heading_err_cross', heading_err_cross
+        print 'robot_position2d', robot_position2d, 'target_position2d', target_position2d
+        print 'pos_delta', pos_delta
+        print 'robot_yaw', robot_yaw
+        print 'norm delta', np.linalg.norm( pos_delta ), 'diffrad', diffrad(robot_yaw, target_pose2d[2])
+        print 'heading_err_cross', heading_err_cross
         
         if arrived or (np.linalg.norm( pos_delta ) < 0.08 and np.fabs(diffrad(robot_yaw, target_pose2d[2]))<0.05) :
             print 'Case 2.1  Stop'
@@ -119,9 +119,14 @@ def navi_loop():
                 wcv.desiredWV_L = -0.05
                 
         elif arrived_position or np.fabs( heading_err_cross ) < 0.2:
-            print 'Case 2.3  Straight forward'  
-            wcv.desiredWV_R = 0.1
-            wcv.desiredWV_L = 0.1
+            if(pos_delta[0]<0):
+                print 'Case 2.3.1  Straight forward'  
+                wcv.desiredWV_R = 0.1
+                wcv.desiredWV_L = 0.1
+            else:
+                print 'Case 2.3.2  Straight backward'  
+                wcv.desiredWV_R = -0.1
+                wcv.desiredWV_L = -0.1
         else:
             if heading_err_cross < 0:
                 print 'Case 2.4.1  Turn right'
