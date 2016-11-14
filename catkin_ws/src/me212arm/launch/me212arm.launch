@@ -18,7 +18,7 @@
     
     <node unless="$(arg real_arm)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
         <param name="rate" value="100"/>
-        <param name="use_gui" value="true"/>
+        <param name="use_gui" value="false"/>
         <rosparam>
             source_list: 
                 - virtual_joint_states
