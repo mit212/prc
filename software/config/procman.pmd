@@ -46,6 +46,11 @@ cmd "3.2-apriltags" {
     host = "localhost";
 }
 
+cmd "3.3-navigation" {
+    exec = "rosrun me212bot apriltag_navi.py";
+    host = "localhost";
+}
+
 cmd "3.4-kinect" {
     exec = "roslaunch freenect_launch freenect.launch depth_registration:=true";
     host = "localhost";
@@ -76,9 +81,17 @@ cmd "4.4-planning-rrt" {
     host = "localhost";
 }
 
+script "run-apriltag-navi" {
+    start cmd "0-roscore";
+    wait ms 1000;
+    start cmd "2-rviz";
+    start cmd "3.1-apriltag_tf";
+    start cmd "3.2-apriltags";
+    start cmd "3.3-navigation";
+    start cmd "3.4-kinect";
+}
 
-
-script "run-virtual" {
+script "run-arm-virtual" {
     start cmd "0-roscore";
     wait ms 1000;
     start cmd "1-robot";
@@ -87,7 +100,7 @@ script "run-virtual" {
     start cmd "3-tf";
 }
 
-script "run-real" {
+script "run-arm-real" {
     start cmd "0-roscore";
     wait ms 1000;
     start cmd "1-robot";
