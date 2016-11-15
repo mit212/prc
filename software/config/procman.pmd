@@ -122,6 +122,6 @@ script "run-arm-real" {
     start cmd "1-robot-arm-real-controller";
     start cmd "1-robot-arm-real-joint-state-publisher";
     start cmd "2-rviz";
-    start cmd "3-tf-robot-map";
+    start cmd "3-tf-robot-map"; 
 }
 
