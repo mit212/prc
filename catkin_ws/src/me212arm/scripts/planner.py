@@ -61,9 +61,9 @@ def Jacobian(q):
     q1 = q[0]
     q2 = q[1]
     s1 = np.sin(q1)
-    s12 = np.sin(q1+q1)
+    s12 = np.sin(q1+q2)
     c1 = np.cos(q1)
-    c12 = np.cos(q1+q1)
+    c12 = np.cos(q1+q2)
     return np.array([[-a1 * s1 - a2 * s12 ,  -a2 * s12  ], 
                      [a1 * c1 + a2 * c12  ,  a2 * c12 ]])
 
