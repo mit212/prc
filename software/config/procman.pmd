@@ -31,8 +31,13 @@ cmd "2-rviz" {
     host = "localhost";
 }
 
-cmd "3-tf" {
+cmd "3-tf-robot-map" {
     exec = "rosrun tf static_transform_publisher 0.6 0.3 0 1.570796 0 0 /map /robot_base 100";
+    host = "localhost";
+}
+
+cmd "3-tf-cam-robotbase" {
+    exec = "rosrun tf static_transform_publisher -0.24 0 0.35 -0.5 0.5 -0.5 0.5 /robot_base /camera 10";
     host = "localhost";
 }
 
@@ -46,17 +51,22 @@ cmd "3.2-apriltags" {
     host = "localhost";
 }
 
-cmd "3.3-navigation" {
+cmd "3.3-robotbase" {
+    exec = "rosrun me212base me212base_node.py";
+    host = "localhost";
+}
+
+cmd "3.4-navigation" {
     exec = "rosrun me212bot apriltag_navi.py";
     host = "localhost";
 }
 
-cmd "3.4-kinect" {
+cmd "3.5-kinect" {
     exec = "roslaunch freenect_launch freenect.launch depth_registration:=true";
     host = "localhost";
 }
 
-cmd "3.5-kinect-calibrate" {
+cmd "3.6-kinect-calibrate" {
     exec = "rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.025 image:=/camera/rgb/image_color";
     host = "localhost";
 }
@@ -84,11 +94,14 @@ cmd "4.4-planning-rrt" {
 script "run-apriltag-navi" {
     start cmd "0-roscore";
     wait ms 1000;
+    start cmd "1-robot";
     start cmd "2-rviz";
+    start cmd "3-tf-cam-robotbase";
     start cmd "3.1-apriltag_tf";
     start cmd "3.2-apriltags";
-    start cmd "3.3-navigation";
-    start cmd "3.4-kinect";
+    start cmd "3.3-robotbase";
+    start cmd "3.4-navigation";
+    start cmd "3.5-kinect";
 }
 
 script "run-arm-virtual" {
@@ -97,7 +110,7 @@ script "run-arm-virtual" {
     start cmd "1-robot";
     start cmd "1-robot-arm-virtual";
     start cmd "2-rviz";
-    start cmd "3-tf";
+    start cmd "3-tf-robot-map";
 }
 
 script "run-arm-real" {
@@ -109,6 +122,6 @@ script "run-arm-real" {
     start cmd "1-robot-arm-real-controller";
     start cmd "1-robot-arm-real-joint-state-publisher";
     start cmd "2-rviz";
-    start cmd "3-tf";
+    start cmd "3-tf-robot-map";
 }
 
