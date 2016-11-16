@@ -17,8 +17,13 @@ boolean usePathPlanner = true;
 
 void setup() {
     Serial.begin(115200);       // initialize Serial Communication
+    //This uses pins 0 and 1
     encoder.init();  // connect with encoder
+    //this uses pins 11,12,13 (spi bus) and 5,6 (channel select)
     wheelVelCtrl.init();        // connect with motor
+    //this uses pins 9 and 10 for PWM
+    //As well as _nD2 = 4; _M1DIR = 7; _M2DIR = 8; _nSF = 12; _M1FB = A0; _M2FB = A1;
+    //CONFLICTS WITH STANDARD ARDUINO SERVO LIBRARY, use ServoTimer2 library instead
     delay(1e3);                 // delay 1000 ms so the robot doesn't drive off without you
 }
 
