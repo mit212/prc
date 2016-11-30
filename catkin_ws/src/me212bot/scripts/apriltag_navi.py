@@ -95,6 +95,7 @@ def navi_loop():
         pos_delta         = np.array(target_position2d) - np.array(robot_position2d)
         robot_heading_vec = np.array([np.cos(robot_yaw), np.sin(robot_yaw)])
         heading_err_cross = cross2d( robot_heading_vec, pos_delta / np.linalg.norm(pos_delta) )
+        heading_err_align = np.dot(pos_delta, robot_heading_vec)
         
         print 'robot_position2d', robot_position2d, 'target_position2d', target_position2d
         print 'pos_delta', pos_delta
@@ -119,7 +120,7 @@ def navi_loop():
                 wcv.desiredWV_L = -0.05
                 
         elif arrived_position or np.fabs( heading_err_cross ) < 0.2:
-            if(pos_delta[0]<0):
+            if(heading_error_align>0):
                 print 'Case 2.3.1  Straight forward'  
                 wcv.desiredWV_R = 0.1
                 wcv.desiredWV_L = 0.1
