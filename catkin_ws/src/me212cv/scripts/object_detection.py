@@ -36,11 +36,10 @@ cx = msg.P[2]
 cy = msg.P[6]
 
 def main():
-    useHSV   = False 
+    useHSV   = False
     useDepth = False
     if not useHSV:
         # Task 1
-
         # subscribe to image
         rospy.Subscriber('/camera/rgb/image_rect_color', Image, rosImageVizCallback)
     else:
@@ -72,7 +71,7 @@ def rosImageVizCallback(msg):
 
     # set callback func for mouse hover event
     cv2.setMouseCallback("OpenCV_View", cvWindowMouseCallBackFunc)
-    cv2.waitKey(3)
+    cv2.waitKey(3)  # milliseconds
 
 # Task 1 callback for mouse event
 def cvWindowMouseCallBackFunc(event, xp, yp, flags, param):
@@ -106,7 +105,6 @@ def rosHSVProcessCallBack(msg):
         centerx, centery = xp+w/2, yp+h/2
         showPyramid(centerx, centery, zc, w, h)
     
-
 # Task 2 object detection code
 def HSVObjectDetection(cv_image, toPrint = True):
     hsv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
