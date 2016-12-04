@@ -42,8 +42,8 @@ cx = msg.P[2]
 cy = msg.P[6]
 
 def main():
-    useHSV   = False
-    useDepth = False
+    useHSV   = True
+    useDepth = True
     if not useHSV:
         # Task 1
         # subscribe to image
@@ -127,7 +127,7 @@ def HSVObjectDetection(cv_image, toPrint = True):
     if toPrint:
         print 'hsv', hsv_image[240][320] # the center point hsv
         
-    showImageInCVWindow(cv_image, mask_eroded, mask_eroded_dilated)
+    showImage(cv_image, mask_eroded, mask_eroded_dilated)
     image,contours,hierarchy = cv2.findContours(mask_eroded_dilated,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
     return contours, mask_eroded_dilated
 
@@ -227,3 +227,4 @@ def poselist2pose(poselist):
 if __name__=='__main__':
     main()
     
+
